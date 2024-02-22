@@ -1,0 +1,25 @@
+﻿@model List<StoreMvc.Models.Order>
+
+<h1>Orders</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>User ID</th>
+            <th>Order Date</th>
+            <th>Payment Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.userId</td>
+                <td>@order.orderDate</td>
+                <td>@order.payType</td>
+            </tr>
+        }
+    </tbody>
+</table>

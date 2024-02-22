@@ -1,0 +1,36 @@
+﻿@model IEnumerable<StoreMvc.Models.Watch>
+
+@{
+    ViewData["Title"] = "All Watches";
+}
+
+<h1>All Watches</h1>
+
+<div class="row">
+    @foreach (var watch in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="@watch.ImageUrl" alt="Watch Image">
+                <div class="card-body">
+                    <h5 class="card-title">@watch.brand @watch.model</h5>
+                    <p class="card-text">Price: $@watch.price</p>
+                </div>
+                <div class="card-footer">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-controller="AllWatches" asp-action="AddToCart" method="post">
+    <input type="hidden" name="watchId" value="@watch.id" />
+    <button type="submit" class="btn btn-primary">Add to Cart</button>
+</form>
+
+                    }
+                    else 
+                    {
+                        <p>Please <a href="/Account/Login">login</a> to add to cart.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

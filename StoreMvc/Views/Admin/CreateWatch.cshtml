@@ -1,0 +1,33 @@
+﻿@model StoreMvc.Models.Watch
+
+@{
+    ViewData["Title"] = "Create Watch";
+}
+
+<h1>Create Watch</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="brand" class="control-label">Brand</label>
+        <input asp-for="brand" class="form-control" />
+        <span asp-validation-for="brand" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="model" class="control-label">Model</label>
+        <input asp-for="model" class="form-control" />
+        <span asp-validation-for="model" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="price" class="control-label">Price</label>
+        <input asp-for="price" class="form-control" />
+        <span asp-validation-for="price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl" class="control-label">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<a asp-action="Manage" class="btn btn-secondary">Back to Manage</a>

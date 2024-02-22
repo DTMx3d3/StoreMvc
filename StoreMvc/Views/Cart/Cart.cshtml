@@ -1,0 +1,56 @@
+﻿@model StoreMvc.Models.Cart
+
+@{
+    ViewData["Title"] = "Cart";
+    decimal totalPrice = 0; // Inițializăm suma totală
+}
+
+<h1>Shopping Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Watch</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.CartDetails != null && Model.CartDetails.Any())
+        {
+            @foreach (var cartDetail in Model.CartDetails)
+            {
+                <tr>
+                    <td>@cartDetail.Watch.brand @cartDetail.Watch.model</td>
+                    <td>@cartDetail.Quantity</td>
+                    <td>@(cartDetail.Watch.price * cartDetail.Quantity)</td>
+                    <td>
+                        <form asp-action="DeleteFromCart" asp-controller="Cart" method="post">
+                            <input type="hidden" name="cartDetailId" value="@cartDetail.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                totalPrice = totalPrice + Convert.ToDecimal(cartDetail.Watch.price * cartDetail.Quantity); 
+            }
+            <tr>
+                <td colspan="2"><strong>Total:</strong></td>
+                <td colspan="2"><strong>@totalPrice</strong></td> 
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No watches in the cart.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model != null && Model.CartDetails != null && Model.CartDetails.Any())
+{
+    <form asp-action="CreateOrder" asp-controller="Order" method="post">
+        <button type="submit" class="btn btn-success">Create Order</button>
+    </form>
+}
